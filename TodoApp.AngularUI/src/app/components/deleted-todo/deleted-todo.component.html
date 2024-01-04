@@ -1,0 +1,26 @@
+<div class="container">
+  <h3>Danh sách các công việc đã bị đánh dấu xoá</h3>
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Description</th>
+          <th scope="col">Created Date</th>
+          <th scope="col">Deleted Date</th>
+          <th scope="col">Is Completed?</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of todos; let idx = index">
+          <td>{{idx}}</td>
+          <td [class.stroke]="item.isCompleted">{{item.description}}</td>
+          <td>{{item.createdDate | date: 'dd/MM/yyyy hh:mm a'}}</td>
+          <td>{{item.deletedDate | date: 'dd/MM/yyyy hh:mm a'}}</td>
+          <td>{{item.isCompleted}}</td>
+          <td><a [routerLink]="[]" (click)="undoDeleteTodo(item.id, item)">Hoàn tác</a></td>
+        </tr>
+      </tbody>
+    </table>
+</div>

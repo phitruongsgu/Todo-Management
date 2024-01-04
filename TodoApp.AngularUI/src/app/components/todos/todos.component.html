@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <h1>Tạo mới công việc</h1>
+    <form #form="ngForm" (ngSubmit)="addTodo()"> <!-- phải đăng kí FormsModule bên app.module.ts -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" id="description" name="description" [(ngModel)]="newTodo.description"/>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <div class="row">
+    <h1>Danh sách công việc</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Description</th>
+          <th scope="col">Created Date</th>
+          <th scope="col">Is Completed?</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of todos; let idx = index">
+          <td>{{idx}}</td>
+          <td [class.stroke]="item.isCompleted">{{item.description}}</td>
+          <td>{{item.createdDate | date: 'dd/MM/yyyy hh:mm a'}}</td>
+          <td><input type="checkbox" [checked]="item.isCompleted" (change)="onCompletedChange(item.id, item)"></td>
+          <td><a [routerLink]="[]" (click)="deleteTodo(item.id)" class="btn btn-danger">Delete</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
